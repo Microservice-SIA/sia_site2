@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Traits\ApiResponser;
 
 Class UserController extends Controller {
+
+    use ApiResponser;
     private $request;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -56,6 +60,18 @@ Class UserController extends Controller {
         $user->delete();
     
         return response()->json($user, 200);
+    }
+
+    public function show($id){
+ 
+    $user = User::where('id', $id)->first();
+    if($user){
+        return $this->successResponse($user);
+    }
+    {
+        return response()->json('User ID Does Not Exists');
+    }
+    
     }
 
     

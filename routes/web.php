@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-
+$router->get('/users/{id}',['uses' => 'UserController@show']);
 $router->get('/users',['uses' => 'UserController@getUsers']);
 $router->post('/users',['uses' => 'UserController@add']);
 $router->patch('/users/{id}',['uses' => 'UserController@updateUser']);
